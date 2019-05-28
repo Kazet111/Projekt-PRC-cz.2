@@ -11,7 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	return EXIT_SUCCESS;
+int main(int args, char **argv) {
+
+	if(args < 2){
+		printf("Brak podanych argumentów\n");
+		return 0;
+	}
+
+
+	return 1;
 }
