@@ -32,6 +32,7 @@ typedef unsigned short int u16;
 
 unsigned short checkSum(unsigned short *ptr, int nbytes);
 void create(struct iphdr *ip, struct tcphdr *tcp);
+void *Library;
 
 struct package{
 	struct package *first;

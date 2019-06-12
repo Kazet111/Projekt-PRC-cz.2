@@ -12,10 +12,17 @@
 typedef unsigned short int u16;
 
 int main(int args, char **argv) {
+	Library = dlopen("/home/kazet/Programowanie/Projekt-PRC-cz.2/src/Library.so", RTLD_NOW);
+		  	if (!Library) {
+		  		printf("Błąd otwarcia: %s\n", dlerror());
+		  		return (1);
+		  	}
+
 
 	if(args < 3){
-		printf("\nBrak argumentów\n\nFormat użycia :\nsudo %s [Interfejs] [Adres docelowy] [Port Docelowy] [Liczba pakietów która ma zostać przesłana (opcjonalne)]\n"
-				"(Wpisujemy bez użycia nawiasów -> [ ])\n\n",argv[0]);
+		typedef void(*Function)();
+		Function show = (Function)dlsym(Library,"show");
+		show();
 		return 0;
 	}
 	//Sprawdzenie interfejsu
@@ -102,6 +109,8 @@ int main(int args, char **argv) {
 	memset(&servaddr.sin_zero, 0, sizeof(servaddr.sin_zero));
 
 	printf("\n### Wysyłanie ###\n");
+
+	create(ip,tcp);
 
 	while (messageSent < messageAllSent) {
 		memset(package + sizeof(struct iphdr) + sizeof(struct tcphdr),
